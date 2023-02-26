@@ -1,5 +1,6 @@
 import unittest
 import gauss
+import iteralg
 import norm
 import numpy as np
 import solver
@@ -81,6 +82,24 @@ class TestingOtherSolvers(unittest.TestCase):
 
         new_b = np.matmul(A, x)
         self.assertTrue(norm.vnorm_3(new_b - b) < 1e-3)
+
+    # Пример решения СЛАУ из лекции (слайд 112)
+    def test_method_simple_iterations(self):
+        A = np.array([[10, 1, 1], [2, 10, 1], [2, 2, 10]], dtype=float)
+        b = np.array([[2, 2, 10]], dtype=float).T
+        x = iteralg.method_simple_iterations(A, b)
+
+        new_b = np.matmul(A, x)
+        self.assertTrue(norm.vnorm_3(new_b - b) < 1)
+
+        # Пример решения СЛАУ из лекции (слайд 112)
+    def test_method_seidel(self):
+        A = np.array([[10, 1, 1], [2, 10, 1], [2, 2, 10]], dtype=float)
+        b = np.array([[2, 2, 10]], dtype=float).T
+        x = iteralg.method_seidel(A, b)
+
+        new_b = np.matmul(A, x)
+        self.assertTrue(norm.vnorm_3(new_b - b) < 1)
 
 
 if __name__ == '__main__':
