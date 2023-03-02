@@ -101,6 +101,17 @@ class TestingOtherSolvers(unittest.TestCase):
         new_b = np.matmul(A, x)
         self.assertTrue(norm.vnorm_3(new_b - b) < 1)
 
+    def test_inv_matrix(self):
+        A = np.array([[1, 2, 1], [0, 1, 0], [0, 2, 2]], dtype=float)
+        U = iteralg.inv(A, verbose=True)
+
+        # self.assertTrue(norm.mnorm_2(E) < 1)
+
+    def test_spectral_radius(self):
+        A = np.array([[5, 1, 2], [1, 4, 1], [2, 1, 3]], dtype=float)
+        l, x = iteralg.spectral_radius(A, eps=0.1, verbose=True)
+
+        # print(l, x, np.linalg.eig(A))
 
 if __name__ == '__main__':
     unittest.main(verbosity=3)
